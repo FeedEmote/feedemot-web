@@ -1,69 +1,88 @@
-import React from 'react'
-// we'll use this to render our app to an html string
-import { renderToString } from 'react-dom/server'
-// and these to match the url to routes and then render
-import { match, RouterContext } from 'react-router'
+/* eslint-env node */
+
+// ------------------------------------------------------------------------------
+// node.js starter application for Bluemix
+// ------------------------------------------------------------------------------
+
+// import React from 'react'
+// // we'll use this to render our app to an html string
+// import { renderToString } from 'react-dom/server'
+// // and these to match the url to routes and then render
+// import { match, RouterContext } from 'react-router'
+// import routes from './app/config/routes'
+
+// This application uses express as its web server
+// for more info, see: http://expressjs.com
 var express = require('express')
+
+// cfenv provides access to your Cloud Foundry environment
+// for more info, see: https://www.npmjs.com/package/cfenv
+var cfenv = require('cfenv')
+
+// get the app environment from Cloud Foundry
+var appEnv = cfenv.getAppEnv()
+
 var path = require('path')
 var compression = require('compression')
-import getRoutes from './app/config/routes'
-import { Provider } from 'react-redux'
-import * as reducers from 'redux/modules'
-import { routerReducer } from 'react-router-redux'
-import { createStore, applyMiddleware, combineReducers } from 'redux'
-import thunk from 'redux-thunk'
-var app = express()
 
-app.use(compression())
-// serve static stuff
-app.use(express.static(path.join(__dirname, 'app', 'public')))
+/* eslint no-console: 0 */
 
-// send all requests to index.html
-app.get('*', (req, res, next) => {
-  const initialState = {}
-  const store = createStore(combineReducers({...reducers, routing: routerReducer}), initialState, applyMiddleware(thunk))
+const webpack = require('webpack')
+const webpackMiddleware = require('webpack-dev-middleware')
+const webpackHotMiddleware = require('webpack-hot-middleware')
+const bodyParser = require('body-parser')
+const jwt = require('jsonwebtoken')
 
-  match({ routes: getRoutes(store), location: req.url }, (err, redirect, props) => {
-    // in here we can make some decisions all at once
-    if (err) {
-      // there was an error somewhere during route matching
-      res.status(500).send(err.message)
-    } else if (redirect) {
-      // we haven't talked about `onEnter` hooks on routes, but before a
-      // route is entered, it can redirect. Here we handle on the server.
-      res.redirect(redirect.pathname + redirect.search)
-    } else if (props) {
+const config = require('./webpack.config.js')
 
-      const components = props.components
-      console.log(components)
-      const appHtml = renderToString(
-        <Provider store={store}>
-          <RouterContext {...props} />
-        </Provider>
-      )
-      const state = store.getState()
-      res.send(renderPage(appHtml, state))
-      // })
-      .catch((err) => next(err))
-    } else {
-      // no errors, no redirect, we just didn't match anything
-      res.status(404).send('404 Not Found')
-    }
+const isDeveloping = process.env.NODE_ENV !== 'production'
+const port = isDeveloping ? 8080 : appEnv.port
+
+// create a new express server
+const app = express()
+
+
+app.use(bodyParser.json())
+
+
+
+// Development
+if (isDeveloping) {
+  const compiler = webpack(config)
+  const middleware = webpackMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+    contentBase: 'src',
+    stats: {
+      colors: true,
+      hash: false,
+      timings: true,
+      chunks: false,
+      chunkModules: false,
+      modules: false,
+    },
   })
-})
-function renderPage (appHtml, state) {
-  return `
-    <!doctype html public="storage">
-    <html>
-    <meta charset=utf-8/>
-    <title>feedemot</title>
-    <div id=app>${appHtml}</div>
-    <script>window.__REDUX_STATE__ = ${JSON.stringify(state)}</script>
-    <script src="/index_bundle.js"></script>
-   `
+  app.use(express.static(path.join(__dirname, 'app', 'public')))
+
+  app.use(middleware)
+  app.use(webpackHotMiddleware(compiler))
+
+  app.get('*', function response (req, res) {
+    res.write(middleware.fileSystem.readFileSync(path.join(__dirname, 'public/index.html')))
+    res.end()
+  })
+} else {
+// Production
+  app.use(compression())
+  app.use(express.static(__dirname + '/dist'))
+
+  app.get('*', function response (req, res) {
+    res.sendFile(path.join(__dirname, 'dist/index.html'))
+  })
 }
 
-var PORT = process.env.PORT || 8080
-app.listen(PORT, function () {
-	console.log('Production Express server running at localhost:' + PORT)
+app.listen(port, function onStart (err) {
+  if (err) {
+    console.log(err)
+  }
+  console.info('==> 🌎 Listening on port %s. Open up http://0.0.0.0:%s/ in your browser.', port, port)
 })
