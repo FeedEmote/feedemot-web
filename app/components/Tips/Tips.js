@@ -1,12 +1,15 @@
 import React, { PropTypes } from 'react'
-import { tipsSection } from './styles.css'
+import { tipsSection, tipsTitle, text } from './styles.css'
 
 Tips.propTypes = {
-  // : PropTypes.string.isRequired,
+  tips : PropTypes.string.isRequired,
 }
 
-export default function Tips (props) {
+export default function Tips ({tips}) {
   return (
-    <div className={tipsSection}>{'Tips'}</div>
+    <div className={tipsSection}>
+      <div className={tipsTitle}>{'Tips'}</div>
+      <div className={text}>{tips}</div>
+    </div>
   )
 }

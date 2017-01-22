@@ -4,15 +4,16 @@ import { Tips, Data } from 'components'
 
 Dashboard.propTypes = {
   data: PropTypes.object.isRequired,
+  tips: PropTypes.string.isRequired,
 }
 
-export default function Dashboard ({data}) {
+export default function Dashboard ({data, tips}) {
   return (
     <div>
       <div className={headline}>{'Real-time analysis'}</div>
       <div className={mainSection}>
         <Data data={data}/>
-        <Tips/>
+        <Tips tips={tips}/>
       </div>
     </div>
   )

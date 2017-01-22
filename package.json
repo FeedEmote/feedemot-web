@@ -3,10 +3,13 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node server",
-    "build": "rimraf dist && webpack --config ./webpack.production.config.js --progress --profile --colors",
-    "lint": "eslint app/. || exit 0",
-    "fix": "eslint --fix app/. || exit 0"
+    "production": "webpack -p",
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:dev": "webpack-dev-server --inline --content-base app/public --history-api-fallback",
+    "start:prod": "npm run build && node server.bundle.js",
+    "build:client": "webpack",
+    "build:server": "webpack --config webpack.server.config.js",
+    "build": "npm run build:client && npm run build:server"
   },
   "dependencies": {
     "autosuggest-highlight": "^3.1.0",

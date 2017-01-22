@@ -2,12 +2,7 @@ import React, { PropTypes } from 'react'
 import TextField from 'material-ui/TextField'
 import { whiteBtn, sectionHeader } from 'sharedStyles/styles.css'
 
-SignUpForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired
-};
+
 
 
 const SignUpForm = ({
@@ -49,6 +44,11 @@ const SignUpForm = ({
     </form>
   </div>
 );
-
+SignUpForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired
+};
 
 export default SignUpForm

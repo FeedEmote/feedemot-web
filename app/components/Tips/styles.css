@@ -1,5 +1,21 @@
 .tipsSection {
+  color: #888;
+  flex:1;
+  /*display: flex;*/
+  /*justify-content: space-between;*/
+  text-align: center;
+}
+
+.tipsTitle {
+  /*flex:1;*/
   color: #e76;
   font-size: 18px;
-  flex:1;
+}
+
+.text {
+  /*flex:1;*/
+  height: 230px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
