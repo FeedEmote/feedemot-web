@@ -1,0 +1,47 @@
+*{
+  box-sizing: border-box;
+}
+
+.emoji {
+  padding-right: 8px;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  padding: 0 0px 0 80px;
+  justify-content: flex-start;
+  text-align: left;
+  align-items: baseline;
+  position: relative;
+}
+
+.emotionName {
+  color: #888;
+  font-size: 14px;
+  min-width: 100px;
+  text-align: center;
+}
+
+.bar {
+  flex:1;
+  position: relative;
+  top: -12px;
+}
+
+.innerBar {
+  position: absolute;
+  top: 0;
+  background: #e76;
+  height: 15px;
+  width: 50%;
+  transition: all 1s;
+}
+
+.outerBar {
+  position: absolute;
+  top: 0;
+  background: #eee;
+  height: 15px;
+  width: 100%;
+}

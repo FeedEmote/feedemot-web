@@ -1,0 +1,16 @@
+.container {
+
+}
+
+.forgot {
+  color: #aaa;
+  border-bottom: 1px dashed #999;
+  cursor: pointer;
+  display: inline;
+  font-size: 14px;
+}
+
+.forgotContainer {
+  margin-top: 20px;
+  text-align: center;
+}

@@ -1,0 +1,13 @@
+.loginContainer {
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
+  width: 100%;
+}
+
+
+.socialSignIn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}

@@ -1,0 +1,6 @@
+export MainContainer from './Main/MainContainer'
+export AuthenticateContainer from './Authenticate/AuthenticateContainer'
+export LogoutContainer from './Logout/LogoutContainer'
+export DashboardContainer from './Dashboard/DashboardContainer'
+export SignUpFormContainer from './SignUpForm/SignUpFormContainer'
+export LoginFormContainer from './LoginForm/LoginFormContainer'

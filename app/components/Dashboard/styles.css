@@ -1,0 +1,14 @@
+.headline {
+  color: #aaa;
+  font-size: 25px;
+  text-align: center;
+  line-height: 55px;
+  font-weight: 100;
+  margin-left: 70px;
+}
+
+.mainSection {
+  display: flex;
+  width: 100%;
+  text-align: center;
+}

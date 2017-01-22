@@ -1,0 +1,15 @@
+.button {
+  composes: button from 'sharedStyles/styles.css';
+  background: linear-gradient(#4c69ba, #3b55a0);
+  color: #fff;
+  border-radius: 2px;
+}
+
+.button:hover {
+  background: #1542A0;
+}
+
+.text {
+  padding-left: 20px;
+  font-size: 16px;
+}

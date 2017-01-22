@@ -1,0 +1,90 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-family: sans-serif;
+  color: #5F5F5F;
+}
+
+h2 {
+  font-weight: 100;
+  color: #e76;
+}
+
+.centeredContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.largeHeader {
+  color: #e76;
+  font-weight: 100;
+  font-size: 100px;
+  margin-bottom: 20px;
+}
+
+.subHeader {
+  color: #aaa;
+  font-size: 35px;
+  text-align: center;
+  line-height: 55px;
+  font-weight: 100;
+}
+
+.sectionHeader {
+  margin-bottom: 0;
+}
+
+.errorMsg {
+  color: #FF7777;
+  font-size: 22px;
+  text-align: center;
+}
+
+.center {
+  text-align: center;
+}
+
+.button {
+  background: #33F;
+  padding: 15px;
+  border-width: 0;
+  cursor: pointer;
+  display: flex;
+  width: 250px;
+}
+
+.whiteBtn {
+  background: #fff;
+  border: 1px solid #e76;
+  border-width: 1;
+  cursor: pointer;
+  width: 256px;
+  padding: 15px;
+  color: #e76;
+  font-size: 16px;
+  border-radius: 2px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.whiteBtn:hover {
+  background: #e76;
+  color: white;
+}
+.baseTextAreaContainer {
+  display: flex;
+  height: 110px;
+  margin: 10px;
+}
+
+.baseTextArea {
+  flex: 1;
+  border-radius: 3px;
+  padding: 8px 10px;
+  font-size: 18px;
+  resize: none;
+}
