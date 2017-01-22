@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { dataSection } from './styles.css'
+import { dataSection,header } from './styles.css'
 import { Emotion } from 'components'
 
 Data.propTypes = {
@@ -9,7 +9,7 @@ Data.propTypes = {
 export default function Data ({data}) {
   return (
     <div className={dataSection}>
-      {'Data'}
+      <div className={header}>{'Data'}</div>
       {
         Object.keys(data).map((key) => {
         return <Emotion key={key} emotion={key} value={data[key]}/>

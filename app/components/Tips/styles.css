@@ -10,12 +10,14 @@
   /*flex:1;*/
   color: #e76;
   font-size: 18px;
+  margin-bottom: 20px;
 }
 
 .text {
   /*flex:1;*/
-  height: 230px;
+  height: 270px;
   display: flex;
+  font-size: 20px;
   align-items: center;
   justify-content: center;
 }

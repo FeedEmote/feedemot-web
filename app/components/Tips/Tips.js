@@ -9,7 +9,7 @@ export default function Tips ({tips}) {
   return (
     <div className={tipsSection}>
       <div className={tipsTitle}>{'Tips'}</div>
-      <div className={text}>{tips}</div>
+      <div className={text}><span>{tips}</span></div>
     </div>
   )
 }
